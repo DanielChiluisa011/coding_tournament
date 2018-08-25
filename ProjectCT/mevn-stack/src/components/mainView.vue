@@ -3,7 +3,7 @@
   <b-row>
     <b-col>
       <!-- <div class="hello"> -->
-        <div id="myMap"></div>
+        <div id="myMap" @onclick="add_marker()"></div>
       <!-- </div> -->
     </b-col>
     <b-col>
@@ -24,9 +24,7 @@
                   :label-cols="4"
                   breakpoint="md"
                   label="Enter Type">
-
-                  <v-select v-model="selected" :options="['foo','bar']"></v-select>
-          <!-- <b-form-input id="type" :state="state" v-model.trim="Incident.type"></b-form-input> -->
+          <b-form-input id="type" :state="state" v-model.trim="Incident.type"></b-form-input>
         </b-form-group>
         <b-form-group id="fieldsetHorizontal"
                   horizontal
