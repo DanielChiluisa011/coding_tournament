@@ -22,6 +22,7 @@
     "serve-favicon": "^2.5.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue-select": "^2.4.0",
     "vuejs-datepicker": "^1.5.3"
   },
   "devDependencies": {

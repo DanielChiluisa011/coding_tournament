@@ -1,9 +1,10 @@
 <template>
+  <div class="main">
   <b-row>
     <b-col>
-      <div class="hello">
+      <!-- <div class="hello"> -->
         <div id="myMap"></div>
-      </div>
+      <!-- </div> -->
     </b-col>
     <b-col>
       <h2>
@@ -23,7 +24,9 @@
                   :label-cols="4"
                   breakpoint="md"
                   label="Enter Type">
-          <b-form-input id="type" :state="state" v-model.trim="Incident.type"></b-form-input>
+
+                  <v-select v-model="selected" :options="['foo','bar']"></v-select>
+          <!-- <b-form-input id="type" :state="state" v-model.trim="Incident.type"></b-form-input> -->
         </b-form-group>
         <b-form-group id="fieldsetHorizontal"
                   horizontal
@@ -36,14 +39,13 @@
                             :format="customFormatter"
                             v-model="event_at">
                 </datepicker>
-          <!-- <b-form-input id="datetime" :state="state" v-model.trim="Incident.date_and_time"></b-form-input> -->
         </b-form-group>
         <b-form-group id="fieldsetHorizontal"
                   horizontal
                   :label-cols="4"
                   breakpoint="md"
                   label="Enter location">
-          <b-form-input id="location" :state="state" v-model.trim="Incident.location"></b-form-input>
+          <b-form-input id="location" :state="state" v-model.trim="Incident.location">{{ position }}</b-form-input>
         </b-form-group>
         <b-form-group id="fieldsetHorizontal"
                   horizontal
@@ -56,14 +58,17 @@
       </b-form>
     </b-col>
   </b-row>
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Datepicker from 'vuejs-datepicker';
 import moment from "moment";
+import Vue from 'vue'
+import vSelect from 'vue-select'
 export default {
-  name: 'hello',
+  name: 'main',
   components: {
        Datepicker,
    },
@@ -73,7 +78,8 @@ export default {
       event_at: '',
       openDate: new Date(),
       Incident: {},
-       files: []
+       files: [],
+       position:"position"
     }},
   mounted: function() {
     var map
@@ -84,12 +90,12 @@ export default {
             map = new google.maps.Map(document.getElementById('myMap'), {
               center: {lat:position.coords.latitude, lng:  position.coords.longitude},
               scrollwheel: false,
-              zoom: 20
+              zoom: 15
             })
             var marker = new google.maps.Marker({
               position: {lat:position.coords.latitude, lng:  position.coords.longitude},
               map: map,
-              title: 'Hello World!',
+              title: 'This is your current position',
               draggable: true
             });
       })
